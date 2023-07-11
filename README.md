@@ -1,6 +1,7 @@
 # 프로젝트 Worker의 실행파일 목록
-<img src="./main.png">
-#### *Read this in other languages: [to English](README.eng.md)
+<img src="./src/chart.jpg">
+
+### 본 문서는 차트 데이터의 처리 파일을 담아놓은 문서로, 머신러닝, 파라미터 튜닝등을 활용한 분석 결과 값을 내보내는 내용을 담고 있다. 
 
 ## Architecture
 <img src="./architecture.png">
