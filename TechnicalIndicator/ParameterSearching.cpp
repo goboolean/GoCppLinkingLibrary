@@ -7,24 +7,24 @@
 namespace ParametricSearch{
      namespace{
           int FindBestRSIValue(torch::Tensor ClosePrice){
-               const int MomentCoefficient= 5;
+               const float MomentCoefficient= 5;
                int BestBuy=30 , BestSell =70, Bestinterval =14 ,BestResult =0;
                for(int t= 2; t<=50; t++){
-               torch::Tensor result = TechnicalIndicator::RSI(ClosePrice,t)
+               torch::Tensor result = TechnicalIndicator::RSI(ClosePrice,t);
                for (int BuyMoment = 1;BuyMoment <= 9;BuyMoment++){
                  for (int SellMoment = 11;SellMoment <= 19;SellMoment++){
                      int TradingProfit =0,TradeCount =0,BuyingPrice;
                      bool TradeCondition =false;
-
+          
                     for(int Times=t-1; Times <= result.size(0)-t;Times++){
-                         if(result[Times].item() <= BuyMoment*MomentCoefficient && TradeCondition == false){
+                         if(result[Times].item<float>() <= BuyMoment*MomentCoefficient && TradeCondition == false){
                               TradeCondition = true;
-                              BuyingPrice = int(ClosePrice[Times].item());
+                              BuyingPrice = ClosePrice[Times].item<int>();
                               TradeCount++;
                          }
-                         else if(result[Times] >= SellMoment*MomentCoefficient && TradeCondition == true){
+                         else if(result[Times].item<float>() >= SellMoment*MomentCoefficient && TradeCondition == true){
                               TradeCondition = false;
-                              TradingProfit += int(ClosePrice[Times].item()) - BuyingPrice;
+                              TradingProfit += ClosePrice[Times].item<int>() - BuyingPrice;
                          }
                     }
                     TradingProfit/=TradeCount;
@@ -52,76 +52,78 @@ namespace ParametricSearch{
                          int TradingProfit =0,TradeCount =0,BuyingPrice;
 
                      for(int iter =t-1; iter<= ClosePrice.size(0)-t; iter++ ){
-                       if (TradeCondition == false && BollingerDown[iter].item()*(80+MomentCoefficient*BuyMoment)/100>= ClosePrice[iter].item()){
+                       if (TradeCondition == false && BollingerDown[iter].item<float>()*(80+MomentCoefficient*BuyMoment)/100>= ClosePrice[iter].item<float>()){
                           TradeCondition =true;
                           TradeCount++;
-                          BuyingPrice = ClosePrice[iter].item();
+                          BuyingPrice = ClosePrice[iter].item<float>();
                           
                        }
-                        else if(BollingerBand[iter].item()*(80+MomentCoefficient*SellMoment) >= ClosePrice[iter].item() && TradeCondition == true ){
+                        else if(BollingerUp[iter].item<float>() *(80+MomentCoefficient*SellMoment) >= ClosePrice[iter].item<float>() && TradeCondition == true ){
                               TickDown--;
                         }
-                        else if(MA[iter].item() && TradeCondition == true && TickDown ==0){
+                        else if(MA[iter].item<float>() && TradeCondition == true && TickDown ==0){
                               TradeCondition = false;
-                              TradingProfit += int(ClosePrice[iter].item()) - BuyingPrice;
+                              TradingProfit += int(ClosePrice[iter].item<float>()) - BuyingPrice;
                          }
+                    }
+                      TradingProfit/=TradeCount;
+             
+                    if (TradingProfit>=BestResult){
+                       BestResult= TradingProfit;
+                       BestInterval = t;
+                       BestTickDown = TickDown;
+                       BestBuy = 80+BuyMoment*MomentCoefficient;
+                       BestSell = 80+SellMoment*MomentCoefficient;
                     }
                     }  
                     }
                }
-               TradingProfit/=TradeCount;
-               if (TradingProfit>=BestResult){
-                    BestResult= TradingProfit;
-                    BestInterval = t;
-                    BestTickDown = TickDown;
-                    BestBuy = 80+BuyMoment*MomentCoefficient;
-                    BestSell = 80+SellMoment*MomentCoefficient;
-               }
+             
                }
             return BestBuy,BestSell,BestTickDown,BestResult,BestInterval;
           }
           int FindBestGoldenDeadCross(torch::Tensor ClosePrice){
                int BestMove, BestSupport,BestResult =0;
                for(int move=2;move<=10;move++){
-                    int TradingProfit =0,TradeCount =0,BuyingPrice;
-                  for(int support=20;support<=40;support++){
-                    bool TradeCondition =false;
+                    float TradingProfit =0,TradeCount =0,BuyingPrice;
+                    for(int support=20;support<=40;support++){
+                     bool TradeCondition =false;
 
                     torch::Tensor MovingLine = TechnicalIndicator::MovingAverage(ClosePrice,move);
                     torch::Tensor SupportLine = TechnicalIndicator::MovingAverage(ClosePrice,support);
                     for(int iter = support-1;iter<=ClosePrice.size(0)-support;iter++){
-                        if(MovingLine[iter].item()>=SupportLine[iter].item() && TradeCondition ==false){
+                        if(MovingLine[iter].item<float>()>=SupportLine[iter].item<float>() && TradeCondition ==false){
                           TradeCondition =true;
-                          TradeCount++;
-                          BuyingPrice = ClosePrice[iter].item();
+                          TradeCount+=1;
+                          BuyingPrice = ClosePrice[iter].item<float>();
                         }
-                        else if(MovingLine[iter].item()>=SupportLine[iter].item() && TradeCondition ==true){
+                        else if(MovingLine[iter].item<float>()>=SupportLine[iter].item<float>() && TradeCondition ==true){
                           TradeCondition =false;
-                          TradingProfit += int(ClosePrice[iter].item()) - BuyingPrice;
+                          TradingProfit += ClosePrice[iter].item<float>() - BuyingPrice;
                         }
                     }
-                   }
-                   TradingProfit/=TradeCount;
-               if (TradingProfit>=BestResult){
+                     TradingProfit/=TradeCount;
+                   if (TradingProfit>=BestResult){
                     BestResult= TradingProfit;
                     BestSupport = support;
                     BestMove = move;
-               }
+                   }
+                   }
                }
             return BestResult, BestSupport, BestMove;
-            int FindBestKDJ(torch::Tensor ClosePrice,torch::Tensor HighPrice,torch::Tensor LowPrice){
+
+          }
+
+         int FindBestKDJ(torch::Tensor ClosePrice,torch::Tensor HighPrice,torch::Tensor LowPrice){
                int BestMove, BestInterval,BestSpan =0;
                for(int Span = 2; Span<=20;Span++){
                     int TradingProfit =0,TradeCount =0,BuyingPrice;
                     for(int interval = 4; interval<=30;interval++){     
                      torch::Tensor PercentK,PercentD,PercentJ = TechnicalIndicator::KDJ(ClosePrice,HighPrice,LowPrice,interval,Span);
                     }
-                    if(PercentJ[] >= 0)
 
                }
             }
-          }
-
 
      }
 }

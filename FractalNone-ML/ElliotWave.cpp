@@ -1,166 +1,127 @@
-from __future__ import annotations
-import numpy as np
-from models.functions import hi, lo, next_hi, next_lo
+#include <torch/torch.h>
+#include <iostream>
 
-class MonoWave:
-    def __init__(self,
-                 lows: np.array,
-                 highs: np.array,
-                 dates: np.array,
-                 idx_start: int,
-                 skip: int = 0):
 
-        self.lows_arr = lows
-        self.highs_arr = highs
-        self.dates_arr = dates
-        self.skip_n = skip
-        self.idx_start = idx_start
-        self.idx_end = int
+class MonoWave{
+    private:
+    torch::Tensor LowPriceData;
+    torch::Tensor HighPriceData;
+    torch::Tensor ClosePriceData;
+    int SkippingValue;
+    int IdxStart;
+    int IdxEnd;
+    int Count;
+    int Degree = 1; 
+    std::string date_start;
+    std::string date_end;
+    float LowestPrice;
+    float HighestPrice;
+    int LowIDX;
+    int HighIDX;
 
-        self.count = int  # the count of the monowave, e.g. 1, 2, A, B, etc
-        self.degree = 1  # 1 = lowest timeframe level, 2 as soon as a e.g. 12345 is found etc.
+    void init(torch::Tensor LowPriceData,torch::Tensor ClosePriceData,torch::Tensor HighPriceData,
+              int IdxStart,int SkippingValue){
+        this->LowPriceData =LowPriceData;
+        this->ClosePriceData = ClosePriceData;
+        this->HighPriceData = HighPriceData;
+        this->IdxStart =IdxStart;
+    }
+    
+    int ReturnLabel(){
+        return this->Count;
+    }
+    float ReturnLength(){
+        return this->HighestPrice - this->LowestPrice ;
+    }
+    int Duration(){
+        return this->IdxEnd- this->IdxStart;
+    }
+    
+    torch::Tensor from_wavepattern(MonoWave (*cls)(torch::Tensor,torch::Tensor,torch::Tensor,int) , MonoWave wave_pattern){//needto vhange
+        torch::Tensor lows = torch::zeros(10),  highs =torch::zeros(10), dates= torch::zeros(10);
 
-        self.date_start = str
-        self.date_end = str
+        if (len(wave_pattern.keys()) == 5){
+            this->LowPriceData = wave_pattern.waves.get('wave1').low;
+            this->LowIDX = wave_pattern.waves.get('wave1').low_idx;
+            this->HighPriceData = wave_pattern.waves.get('wave5').high;
+            this->HighIDX = wave_pattern.waves.get('wave5').high_idx;
+            date_start = wave_pattern.waves.get('wave1').date_start;
+            date_end = wave_pattern.waves.get('wave5').date_end;
 
-        self.low = float
-        self.high = float
-        self.low_idx = int
-        self.high_idx = int
+            MonoWave monowave_up = cls(lows, highs, dates, 0);
 
-    @property
-    def labels(self) -> str:
-        return str(self.count)
+            monowave_up.low, monowave_up.low_idx, monowave_up.high, monowave_up.high_idx = low, low_idx, high, high_idx;
+            monowave_up.date_start, monowave_up.date_end = date_start, date_end;
 
-    @property
-    def length(self) -> float:
-        return abs(self.high - self.low)
+            monowave_up.degree = wave_pattern.waves.get('wave1').degree + 1;
+            return monowave_up;
+        }
+        else if (len(wave_pattern.waves.keys()) == 3){
+            low = wave_pattern.waves.get('wave3').low;
+            low_idx = wave_pattern.waves.get('wave3').low_idx;
+            high = wave_pattern.waves.get('wave1').high;
+            high_idx = wave_pattern.waves.get('wave1').high_idx;
+            date_start = wave_pattern.waves.get('wave1').date_start;
+            date_end = wave_pattern.waves.get('wave3').date_end;
 
-    @property
-    def duration(self) -> int:
-        return self.idx_end - self.idx_start
+            monowave_down = cls(lows, highs, dates, 0);
+            monowave_down.low, monowave_down.low_idx, monowave_down.high, monowave_down.high_idx = low, low_idx, high, high_idx;
+            monowave_down.date_start, monowave_down.date_end = date_start, date_end;
 
-    @classmethod
-    def from_wavepattern(cls, wave_pattern):
-        lows = highs = dates = np.zeros(10)  # dummy arrays to init class
+            monowave_down.degree = wave_pattern.waves.get('wave1').degree + 1;
 
-        if len(wave_pattern.waves.keys()) == 5:
-            low = wave_pattern.waves.get('wave1').low
-            low_idx = wave_pattern.waves.get('wave1').low_idx
-            high = wave_pattern.waves.get('wave5').high
-            high_idx = wave_pattern.waves.get('wave5').high_idx
-            date_start = wave_pattern.waves.get('wave1').date_start
-            date_end = wave_pattern.waves.get('wave5').date_end
+            return monowave_down;
+        }
+    }
 
-            monowave_up = cls(lows, highs, dates, 0)
-
-            monowave_up.low, monowave_up.low_idx, monowave_up.high, monowave_up.high_idx = low, low_idx, high, high_idx
-            monowave_up.date_start, monowave_up.date_end = date_start, date_end
-
-            monowave_up.degree = wave_pattern.waves.get('wave1').degree + 1
-            return monowave_up
-
-        elif len(wave_pattern.waves.keys()) == 3:
-            low = wave_pattern.waves.get('wave3').low
-            low_idx = wave_pattern.waves.get('wave3').low_idx
-            high = wave_pattern.waves.get('wave1').high
-            high_idx = wave_pattern.waves.get('wave1').high_idx
-            date_start = wave_pattern.waves.get('wave1').date_start
-            date_end = wave_pattern.waves.get('wave3').date_end
-
-            monowave_down = cls(lows, highs, dates, 0)
-            monowave_down.low, monowave_down.low_idx, monowave_down.high, monowave_down.high_idx = low, low_idx, high, high_idx
-            monowave_down.date_start, monowave_down.date_end = date_start, date_end
-
-            monowave_down.degree = wave_pattern.waves.get('wave1').degree + 1
-
-            return monowave_down
-
-        else:
-            raise ValueError('WavePattern other than 3 or 5 waves implemented, yet.')
-
+}  
 
 class MonoWaveUp(MonoWave):
-    """
-    Describes a upwards movement, which can have [skip_n] smaller downtrends
-    """
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.high, self.high_idx = self.find_end()
-        self.low = self.lows_arr[self.idx_start]
-        self.low_idx = self.idx_start
-        self.idx_end = self.high_idx
-        self.date_start = self.dates_arr[self.idx_start]
-        self.date_end = self.dates_arr[self.high_idx]
-
-    def find_end(self):
-        """
-        Finds the end of this MonoWave
-
-        :param idx_start:
-        :return:
-        """
+    def find_end(self){
         high, high_idx = hi(self.lows_arr, self.highs_arr, self.idx_start)
         low_at_start = self.lows_arr[self.idx_start]
 
         if high is None:
-            return None, None
+            return None, None;
 
-        for _ in range(self.skip_n):
+        for (int i=0;i<skip_n;i++){
 
             act_high, act_high_idx = next_hi(self.lows_arr, self.highs_arr, high_idx, high)
             if act_high is None:
-                return None, None
+                return None, None;
 
-            if act_high > high:
-                high = act_high
-                high_idx = act_high_idx
-                if np.min(self.lows_arr[self.idx_start:act_high_idx] < low_at_start):
-                    return None, None
-
+            if act_high > high{
+                this->high = act_high;
+                this->high_idx = act_high_idx;
+                if np.min(self.lows_arr[self.idx_start:act_high_idx] < low_at_start)
+                    return None, None;
+            
+        }
         return high, high_idx
+        }
 
-    @property
-    def dates(self) -> list:
-        return [self.date_start, self.date_end]
-
-    @property
-    def points(self):
-        return self.low, self.high
+  
+    def dates(self){
+        return (self.date_start, self.date_end);
+    }
+   
+    torch::Tensor points(){
+        return (self.low, self.high);
+    }
 
 
 class MonoWaveDown(MonoWave):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
 
-        self.low, self.low_idx = self.find_end()
-        self.high = self.highs_arr[self.idx_start]
-        self.high_idx = self.idx_start
-
-        self.date_start = self.dates_arr[self.idx_start]
-        if self.low is not None:
-            self.date_end = self.dates_arr[self.low_idx]
-            self.idx_end = self.low_idx
-        else:
-            self.date_end = None
-            self.idx_end = None
-
-    @property
+   
     def dates(self) -> list:
-        return [self.date_start, self.date_end]
+        return [self.date_start, self.date_end];
 
-    @property
+   
     def points(self):
         return self.high, self.low
 
     def find_end(self):
-        """
-        Finds the end of this MonoWave (downwards)
-
-        :return:
-        """
 
         low, low_idx = lo(self.lows_arr, self.highs_arr, self.idx_start)
         high_at_start = self.highs_arr[self.idx_start]
@@ -178,81 +139,63 @@ class MonoWaveDown(MonoWave):
                 if np.max(self.highs_arr[self.idx_start:act_low_idx]) > high_at_start:
                     return None, None
 
-            # TODO what to do if no more minima can be found?
-            # if act_low > low:
-            #    return None, None
-        #if low > np.min(self.lows_arr[low_idx:]):
-        #    return None, None
-        #else:
         return low, low_idx
 
-from models.WavePattern import WavePattern
+class WaveCycle{
+ private:
+       torch::Tensor wp_up;
+        torch::Tensor wp_down;
+        torch::Tensor degree;
+        std::vector <torch::Tensor> waves =  ;
+    
+    void Init(wavepattern_up: WavePattern, wavepattern_down: WavePattern):
+        wp_up = wavepattern_up;
+        wp_down = wavepattern_down;
+        degree = wp_up.degree;
+        extract_waves();
+    
+    int end_idx(self):
+        return this->wp_down.end_idx
 
-class WaveCycle:
-    """
-    One Cycle of 12345 -> ABC
-    """
-    def __init__(self, wavepattern_up: WavePattern, wavepattern_down: WavePattern):
-        self.wp_up = wavepattern_up
-        self.wp_down = wavepattern_down
-        self.degree = self.wp_up.degree
-        self.waves = list()
-        self.extract_waves()
+   
+    int start_idx(self):
+        return this->wp_up.start_idx
 
-    @property
-    def end_idx(self):
-        return self.wp_down.end_idx
-
-    @property
-    def start_idx(self):
-        return self.wp_up.start_idx
-
-    def extract_waves(self):
-        for key, wave in self.wp_up.waves.items():
+    MonoWave extract_waves(self):
+        for key, wave in self.wp_up.waves:
             self.waves.append(wave)
 
         for key, wave in self.wp_down.waves.items():
             self.waves.append(wave)
 
-    @property
     def dates(self):
         dates = self.wp_up.dates
         dates.extend(self.wp_down.dates)
         return dates
 
-    @property
     def values(self):
         values = self.wp_up.values
         values.extend(self.wp_down.values)
-        return values
+        return values;
 
-    @property
+   
     def labels(self):
-        labels = self.wp_up.labels
-        labels.extend(self.wp_down.labels)
-        return labels
+        labels = self.wp_up.labels;
+        labels.extend(self.wp_down.labels);
+        return labels;
 
-    # @classmethod
-    # def from_wave_options(cls, df: pd.DataFrame, waveoptions_up: WaveOptions, waveoptions_down: WaveOptions):
-    #     idx_start = np.argmin(np.array(list(df['Low'])))
-    #
-    #     wa = WaveAnalyzer(df=df, verbose=True)
-    #
-    #     waves_up = wa.find_impulsive_wave(idx_start=idx_start, wave_config=waveoptions_up.values)
-    #     wave_pattern_up = WavePattern(waves_up)
-    #     waves_down = wa.find_corrective_wave(idx_start=waves_up[4].idx_end, wave_config=waveoptions_down.values)
-    #     wave_pattern_down = WavePattern(waves_down)
-    #
-    #     return cls(wave_pattern_up, wave_pattern_down)
 
     def __eq__(self, other):
-        if self.wp_down.values == other.wp_down.values and self.wp_up.values == other.wp_up.values:
-            return True
-        else:
-            return False
+        if (self.wp_down.values == other.wp_down.values) &&( self.wp_up.values == other.wp_up.values)
+            return true;
+        else
+        return false;
 
     def __hash__(self):
-        str_to_hash = f'{self.wp_up.values}_{self.wp_down.values}'
-        return hash(str_to_hash)
+        str_to_hash = f'{self.wp_up.values}_{self.wp_down.values}
+        return hash(str_to_hash);
+
+}
+
 
 

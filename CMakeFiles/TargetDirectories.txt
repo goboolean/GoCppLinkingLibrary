@@ -1,3 +1,0 @@
-/home/jepetolee/GoCppLinkingLibrary/CMakeFiles/example-app.dir
-/home/jepetolee/GoCppLinkingLibrary/CMakeFiles/edit_cache.dir
-/home/jepetolee/GoCppLinkingLibrary/CMakeFiles/rebuild_cache.dir

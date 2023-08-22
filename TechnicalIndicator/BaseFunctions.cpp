@@ -1,8 +1,7 @@
 #include <torch/torch.h>
-
+#include "BaseFunctions.hpp"
 namespace BaseFunction{
-     namespace{
-     torch::Tensor ExponentialWeightMovingAverage(torch::Tensor Chart, float PeriodalInterval ){
+     torch::Tensor ExponentialWeightMovingAverage(torch::Tensor Chart, long PeriodalInterval ){
         float alpha = 1/ PeriodalInterval;
         torch::Tensor EWM =  torch::zeros({Chart.size(0)-PeriodalInterval,Chart.size(1)});
         for(int iter= 0; iter<Chart.size(0)-PeriodalInterval;iter++)
@@ -12,12 +11,11 @@ namespace BaseFunction{
     torch::Tensor RollingTensor(torch::Tensor Chart, int PeriodalInterval){ 
           torch::Tensor Rolling =  torch::ones({Chart.size(0),PeriodalInterval});
           for(int iter= 0; iter<Chart.size(0)-PeriodalInterval;iter++)
-            Rolling[iter+PeriodalInterval-1] =  Price.index({Slice(0+iter,PeriodalInterval+iter)});
+            Rolling[iter+PeriodalInterval-1] =  Chart.slice(0+iter,PeriodalInterval+iter);
           
       return Rolling;
      }
      torch::Tensor TensorDifference(torch::Tensor Price){
-          return Price.index({Slice(1,Price.size(0))}) - Price.index({Slice(0,Price.size(0)-1)});
-     }
+          return Price.slice(1,Price.size(0)) - Price.slice(0,Price.size(0)-1);
      }
 }

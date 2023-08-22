@@ -1,0 +1,3 @@
+/home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles/test.dir
+/home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles/edit_cache.dir
+/home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles/rebuild_cache.dir
