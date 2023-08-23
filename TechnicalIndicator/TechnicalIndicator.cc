@@ -50,6 +50,7 @@ namespace TechnicalIndicator{
              
              return RSI;
           }
+          
           std::vector<torch::Tensor> BollingerBand(torch::Tensor ClosePrice, int TimeInterval){
              torch::Tensor movingAverage = MovingAverage(ClosePrice,TimeInterval );
              torch::Tensor standardDeviation = BaseFunction::RollingTensor(ClosePrice, TimeInterval).std(1);
