@@ -8,16 +8,28 @@ find_path( TORCH_INCLUDE_DIR torch/torch.h
            NO_DEFAULT_PATH )
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")   
 
-add_library(techindicator STATIC  /home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.hpp
-               /home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cc )
-      
+            
+
+add_library(techindicator SHARED  
+            /home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.h
+              /home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp
+              /home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.h
+              /home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp)
+
+
+add_library(BaseFunctionz SHARED  
+              /home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.h
+              /home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp)
+
 target_link_libraries( techindicator "${TORCH_LIBRARIES}")
 
-add_executable(testcode1 TestTechnicalIndicator.cc
-               /home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.hpp
-               /home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cc )
+target_link_libraries( BaseFunctionz "${TORCH_LIBRARIES}")
 
-target_link_libraries(testcode1 "${TORCH_LIBRARIES}")
+add_executable(testcode1 TestTechnicalIndicator.cpp )
+target_link_libraries(techindicator BaseFunctionz)
+target_link_libraries(testcode1 "${TORCH_LIBRARIES}" techindicator BaseFunctionz)
+
+
 
 set_property(TARGET testcode1 PROPERTY CXX_STANDARD 17)
 

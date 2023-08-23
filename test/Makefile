@@ -117,24 +117,50 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test
+# Target rules for targets named techindicator
 
 # Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
-.PHONY : test
+techindicator: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 techindicator
+.PHONY : techindicator
 
 # fast build rule for target.
-test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-.PHONY : test/fast
+techindicator/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/techindicator.dir/build.make CMakeFiles/techindicator.dir/build
+.PHONY : techindicator/fast
+
+#=============================================================================
+# Target rules for targets named BaseFunctionz
+
+# Build rule for target.
+BaseFunctionz: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BaseFunctionz
+.PHONY : BaseFunctionz
+
+# fast build rule for target.
+BaseFunctionz/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BaseFunctionz.dir/build.make CMakeFiles/BaseFunctionz.dir/build
+.PHONY : BaseFunctionz/fast
+
+#=============================================================================
+# Target rules for targets named testcode1
+
+# Build rule for target.
+testcode1: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 testcode1
+.PHONY : testcode1
+
+# fast build rule for target.
+testcode1/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode1.dir/build.make CMakeFiles/testcode1.dir/build
+.PHONY : testcode1/fast
 
 TestTechnicalIndicator.o: TestTechnicalIndicator.cpp.o
 .PHONY : TestTechnicalIndicator.o
 
 # target to build an object file
 TestTechnicalIndicator.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/TestTechnicalIndicator.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode1.dir/build.make CMakeFiles/testcode1.dir/TestTechnicalIndicator.cpp.o
 .PHONY : TestTechnicalIndicator.cpp.o
 
 TestTechnicalIndicator.i: TestTechnicalIndicator.cpp.i
@@ -142,7 +168,7 @@ TestTechnicalIndicator.i: TestTechnicalIndicator.cpp.i
 
 # target to preprocess a source file
 TestTechnicalIndicator.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/TestTechnicalIndicator.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode1.dir/build.make CMakeFiles/testcode1.dir/TestTechnicalIndicator.cpp.i
 .PHONY : TestTechnicalIndicator.cpp.i
 
 TestTechnicalIndicator.s: TestTechnicalIndicator.cpp.s
@@ -150,8 +176,59 @@ TestTechnicalIndicator.s: TestTechnicalIndicator.cpp.s
 
 # target to generate assembly for a file
 TestTechnicalIndicator.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/TestTechnicalIndicator.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode1.dir/build.make CMakeFiles/testcode1.dir/TestTechnicalIndicator.cpp.s
 .PHONY : TestTechnicalIndicator.cpp.s
+
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.o: home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.o
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.o
+
+# target to build an object file
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/techindicator.dir/build.make CMakeFiles/techindicator.dir/home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BaseFunctionz.dir/build.make CMakeFiles/BaseFunctionz.dir/home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.o
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.o
+
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.i: home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.i
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.i
+
+# target to preprocess a source file
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/techindicator.dir/build.make CMakeFiles/techindicator.dir/home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BaseFunctionz.dir/build.make CMakeFiles/BaseFunctionz.dir/home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.i
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.i
+
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.s: home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.s
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.s
+
+# target to generate assembly for a file
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/techindicator.dir/build.make CMakeFiles/techindicator.dir/home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BaseFunctionz.dir/build.make CMakeFiles/BaseFunctionz.dir/home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.s
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.s
+
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.o: home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.o
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.o
+
+# target to build an object file
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/techindicator.dir/build.make CMakeFiles/techindicator.dir/home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.o
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.o
+
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.i: home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.i
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.i
+
+# target to preprocess a source file
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/techindicator.dir/build.make CMakeFiles/techindicator.dir/home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.i
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.i
+
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.s: home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.s
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.s
+
+# target to generate assembly for a file
+home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/techindicator.dir/build.make CMakeFiles/techindicator.dir/home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.s
+.PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.cpp.s
 
 # Help Target
 help:
@@ -161,10 +238,18 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... test"
+	@echo "... BaseFunctionz"
+	@echo "... techindicator"
+	@echo "... testcode1"
 	@echo "... TestTechnicalIndicator.o"
 	@echo "... TestTechnicalIndicator.i"
 	@echo "... TestTechnicalIndicator.s"
+	@echo "... home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.o"
+	@echo "... home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.i"
+	@echo "... home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.s"
+	@echo "... home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.o"
+	@echo "... home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.i"
+	@echo "... home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.s"
 .PHONY : help
 
 

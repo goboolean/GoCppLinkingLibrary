@@ -1,3 +1,5 @@
-/home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles/test.dir
+/home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles/techindicator.dir
+/home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles/BaseFunctionz.dir
+/home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles/testcode1.dir
 /home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles/edit_cache.dir
 /home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles/rebuild_cache.dir

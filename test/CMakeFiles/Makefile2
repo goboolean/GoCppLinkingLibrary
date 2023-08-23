@@ -63,7 +63,9 @@ CMAKE_BINARY_DIR = /home/jepetolee/GoCppLinkingLibrary/test
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/test.dir/all
+all: CMakeFiles/techindicator.dir/all
+all: CMakeFiles/BaseFunctionz.dir/all
+all: CMakeFiles/testcode1.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +73,89 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/test.dir/clean
+clean: CMakeFiles/techindicator.dir/clean
+clean: CMakeFiles/BaseFunctionz.dir/clean
+clean: CMakeFiles/testcode1.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/test.dir
+# Target rules for target CMakeFiles/techindicator.dir
 
 # All Build rule for target.
-CMakeFiles/test.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles --progress-num=1,2 "Built target test"
-.PHONY : CMakeFiles/test.dir/all
+CMakeFiles/techindicator.dir/all: CMakeFiles/BaseFunctionz.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/techindicator.dir/build.make CMakeFiles/techindicator.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/techindicator.dir/build.make CMakeFiles/techindicator.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles --progress-num=3,4,5 "Built target techindicator"
+.PHONY : CMakeFiles/techindicator.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test.dir/all
+CMakeFiles/techindicator.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles 5
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/techindicator.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles 0
-.PHONY : CMakeFiles/test.dir/rule
+.PHONY : CMakeFiles/techindicator.dir/rule
 
 # Convenience name for target.
-test: CMakeFiles/test.dir/rule
-.PHONY : test
+techindicator: CMakeFiles/techindicator.dir/rule
+.PHONY : techindicator
 
 # clean rule for target.
-CMakeFiles/test.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/clean
-.PHONY : CMakeFiles/test.dir/clean
+CMakeFiles/techindicator.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/techindicator.dir/build.make CMakeFiles/techindicator.dir/clean
+.PHONY : CMakeFiles/techindicator.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/BaseFunctionz.dir
+
+# All Build rule for target.
+CMakeFiles/BaseFunctionz.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BaseFunctionz.dir/build.make CMakeFiles/BaseFunctionz.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BaseFunctionz.dir/build.make CMakeFiles/BaseFunctionz.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles --progress-num=1,2 "Built target BaseFunctionz"
+.PHONY : CMakeFiles/BaseFunctionz.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/BaseFunctionz.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/BaseFunctionz.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles 0
+.PHONY : CMakeFiles/BaseFunctionz.dir/rule
+
+# Convenience name for target.
+BaseFunctionz: CMakeFiles/BaseFunctionz.dir/rule
+.PHONY : BaseFunctionz
+
+# clean rule for target.
+CMakeFiles/BaseFunctionz.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BaseFunctionz.dir/build.make CMakeFiles/BaseFunctionz.dir/clean
+.PHONY : CMakeFiles/BaseFunctionz.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/testcode1.dir
+
+# All Build rule for target.
+CMakeFiles/testcode1.dir/all: CMakeFiles/techindicator.dir/all
+CMakeFiles/testcode1.dir/all: CMakeFiles/BaseFunctionz.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode1.dir/build.make CMakeFiles/testcode1.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode1.dir/build.make CMakeFiles/testcode1.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles --progress-num=6,7 "Built target testcode1"
+.PHONY : CMakeFiles/testcode1.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/testcode1.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles 7
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/testcode1.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jepetolee/GoCppLinkingLibrary/test/CMakeFiles 0
+.PHONY : CMakeFiles/testcode1.dir/rule
+
+# Convenience name for target.
+testcode1: CMakeFiles/testcode1.dir/rule
+.PHONY : testcode1
+
+# clean rule for target.
+CMakeFiles/testcode1.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode1.dir/build.make CMakeFiles/testcode1.dir/clean
+.PHONY : CMakeFiles/testcode1.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
