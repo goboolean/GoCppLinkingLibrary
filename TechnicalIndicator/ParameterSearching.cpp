@@ -1,7 +1,7 @@
 #include <torch/torch.h>
 #include <torch/script.h>
 #include <iostream>
-#include <GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.hpp>
+#include "GoCppLinkingLibrary/TechnicalIndicator/TechnicalIndicator.h"
 
 
 namespace ParametricSearch{
@@ -44,7 +44,8 @@ namespace ParametricSearch{
                int BestInterval,BestTickDown,BestBuy,BestSell,BestResult=0;
           
                for(int t= 2; t<=50; t++){
-                    std::vector<torch::Tensor> {BollingerUp,MA, BollingerDown} = TechnicalIndicator::BollingerBand(ClosePrice,t);
+                    std::vector<torch::Tensor> OutputTensors = TechnicalIndicator::BollingerBand(ClosePrice,t);
+                    torch::Tensor BollingerUp =OutputTensors[0] ,MA =OutputTensors[1] , BollingerDown =OutputTensors[2];
                     for (int TickDown =10; TickDown>=1;TickDown--){
                     for (int BuyMoment = 0;BuyMoment <= 8;BuyMoment++){
                        for (int SellMoment = 0;SellMoment <= 8;SellMoment++){
@@ -114,16 +115,17 @@ namespace ParametricSearch{
 
           }
 
-         int FindBestKDJ(torch::Tensor ClosePrice,torch::Tensor HighPrice,torch::Tensor LowPrice){
+         /*int FindBestKDJ(torch::Tensor ClosePrice,torch::Tensor HighPrice,torch::Tensor LowPrice){
                int BestMove, BestInterval,BestSpan =0;
                for(int Span = 2; Span<=20;Span++){
                     int TradingProfit =0,TradeCount =0,BuyingPrice;
                     for(int interval = 4; interval<=30;interval++){     
-                     torch::Tensor PercentK,PercentD,PercentJ = TechnicalIndicator::KDJ(ClosePrice,HighPrice,LowPrice,interval,Span);
+                     std::vector<torch::Tensor> OuputTensors  = TechnicalIndicator::KDJ(ClosePrice,HighPrice,LowPrice,interval,Span);
+                     PercentK,PercentD,PercentJ
                     }
 
                }
-            }
+            }*/
 
      }
 }

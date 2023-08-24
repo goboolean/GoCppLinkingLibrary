@@ -151,7 +151,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=testcode1
+CMAKE_PROJECT_NAME:STATIC=testcode2
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -265,6 +265,15 @@ testcode1_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 testcode1_SOURCE_DIR:STATIC=/home/jepetolee/GoCppLinkingLibrary/test
+
+//Value Computed by CMake
+testcode2_BINARY_DIR:STATIC=/home/jepetolee/GoCppLinkingLibrary/test
+
+//Value Computed by CMake
+testcode2_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+testcode2_SOURCE_DIR:STATIC=/home/jepetolee/GoCppLinkingLibrary/test
 
 
 ########################

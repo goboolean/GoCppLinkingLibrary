@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
 
 project(testcode1)
+project(testcode2)
+
 find_package(Torch REQUIRED)
 find_path( TORCH_INCLUDE_DIR torch/torch.h
            PATHS 
@@ -26,18 +28,13 @@ target_link_libraries( techindicator "${TORCH_LIBRARIES}")
 target_link_libraries( BaseFunctionz "${TORCH_LIBRARIES}")
 
 add_executable(testcode1 TestTechnicalIndicator.cpp )
+add_executable(testcode2 TestLogisticRegression.cpp /home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.h /home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp )
 target_link_libraries(techindicator BaseFunctionz)
-target_link_libraries(testcode1 "${TORCH_LIBRARIES}" techindicator BaseFunctionz)
 
+target_link_libraries(testcode1 "${TORCH_LIBRARIES}" techindicator BaseFunctionz)
+target_link_libraries(testcode2 "${TORCH_LIBRARIES}" )
 
 
 set_property(TARGET testcode1 PROPERTY CXX_STANDARD 17)
+set_property(TARGET testcode2 PROPERTY CXX_STANDARD 17)
 
-if (MSVC)
-  file(GLOB TORCH_DLLS "${TORCH_INSTALL_PREFIX}/lib/*.dll")
-  add_custom_command(TARGET testcode1
-                     POST_BUILD
-                     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                     ${TORCH_DLLS}
-                     $<TARGET_FILE_DIR:testcode1>)
-endif (MSVC)

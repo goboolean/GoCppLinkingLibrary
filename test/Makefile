@@ -155,6 +155,43 @@ testcode1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode1.dir/build.make CMakeFiles/testcode1.dir/build
 .PHONY : testcode1/fast
 
+#=============================================================================
+# Target rules for targets named testcode2
+
+# Build rule for target.
+testcode2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 testcode2
+.PHONY : testcode2
+
+# fast build rule for target.
+testcode2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode2.dir/build.make CMakeFiles/testcode2.dir/build
+.PHONY : testcode2/fast
+
+TestLogisticRegression.o: TestLogisticRegression.cpp.o
+.PHONY : TestLogisticRegression.o
+
+# target to build an object file
+TestLogisticRegression.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode2.dir/build.make CMakeFiles/testcode2.dir/TestLogisticRegression.cpp.o
+.PHONY : TestLogisticRegression.cpp.o
+
+TestLogisticRegression.i: TestLogisticRegression.cpp.i
+.PHONY : TestLogisticRegression.i
+
+# target to preprocess a source file
+TestLogisticRegression.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode2.dir/build.make CMakeFiles/testcode2.dir/TestLogisticRegression.cpp.i
+.PHONY : TestLogisticRegression.cpp.i
+
+TestLogisticRegression.s: TestLogisticRegression.cpp.s
+.PHONY : TestLogisticRegression.s
+
+# target to generate assembly for a file
+TestLogisticRegression.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode2.dir/build.make CMakeFiles/testcode2.dir/TestLogisticRegression.cpp.s
+.PHONY : TestLogisticRegression.cpp.s
+
 TestTechnicalIndicator.o: TestTechnicalIndicator.cpp.o
 .PHONY : TestTechnicalIndicator.o
 
@@ -178,6 +215,30 @@ TestTechnicalIndicator.s: TestTechnicalIndicator.cpp.s
 TestTechnicalIndicator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode1.dir/build.make CMakeFiles/testcode1.dir/TestTechnicalIndicator.cpp.s
 .PHONY : TestTechnicalIndicator.cpp.s
+
+home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.o: home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.o
+.PHONY : home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.o
+
+# target to build an object file
+home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode2.dir/build.make CMakeFiles/testcode2.dir/home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.o
+.PHONY : home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.o
+
+home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.i: home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.i
+.PHONY : home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.i
+
+# target to preprocess a source file
+home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode2.dir/build.make CMakeFiles/testcode2.dir/home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.i
+.PHONY : home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.i
+
+home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.s: home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.s
+.PHONY : home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.s
+
+# target to generate assembly for a file
+home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testcode2.dir/build.make CMakeFiles/testcode2.dir/home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.s
+.PHONY : home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.cpp.s
 
 home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.o: home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.cpp.o
 .PHONY : home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.o
@@ -241,9 +302,16 @@ help:
 	@echo "... BaseFunctionz"
 	@echo "... techindicator"
 	@echo "... testcode1"
+	@echo "... testcode2"
+	@echo "... TestLogisticRegression.o"
+	@echo "... TestLogisticRegression.i"
+	@echo "... TestLogisticRegression.s"
 	@echo "... TestTechnicalIndicator.o"
 	@echo "... TestTechnicalIndicator.i"
 	@echo "... TestTechnicalIndicator.s"
+	@echo "... home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.o"
+	@echo "... home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.i"
+	@echo "... home/jepetolee/GoCppLinkingLibrary/ML/LogisticRegression.s"
 	@echo "... home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.o"
 	@echo "... home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.i"
 	@echo "... home/jepetolee/GoCppLinkingLibrary/TechnicalIndicator/BaseFunctions.s"

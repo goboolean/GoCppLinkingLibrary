@@ -56,4 +56,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/techindicator.dir/DependInfo.cmake"
   "CMakeFiles/BaseFunctionz.dir/DependInfo.cmake"
   "CMakeFiles/testcode1.dir/DependInfo.cmake"
+  "CMakeFiles/testcode2.dir/DependInfo.cmake"
   )
