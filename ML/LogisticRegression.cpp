@@ -6,7 +6,7 @@ torch::Tensor LogisiticRegression  (torch::Tensor Data, std::string load_link ){
          torch::nn::Sigmoid()
           );
           torch::load(LogisiticModel,load_link);
-          return torch::softmax(LogisiticModel->forward(Data),1);
+          return LogisiticModel->forward(Data);
      }
 
 void TrainingLogisitcRegression  (torch::Tensor testing_data, std::string load_link){
